@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto" 
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent" 
+android:layout_height="match_parent" 
+android:orientation="vertical" 
+tools:context=".MainActivity"> 
+<TextView
+android:layout_width="match_parent" 
+android:layout_height="wrap_content" 
+android:text="XML and JSON Parser" 
+android:textSize="30sp" 
+android:textAlignment="center" />
+<Button
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:onClick="XMLParser" 
+android:text="XML PARSER" 
+android:textAlignment="center" /> 
+<Button
+android:layout_width="match_parent"
+android:layout_height="wrap_content" 
+android:onClick="JSONParser" 
+android:text="JSON PARSER" 
+android:textAlignment="center" />
+<LinearLayout 
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal" 
+android:layout_gravity="center">
+<TextView 
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:id="@+id/resxml" 
+android:textSize="15sp" 
+android:textAlignment="center" 
+android:paddingLeft="10dp"
+android:paddingRight="40dp" /> 
+<TextView 
+android:layout_width="wrap_content"
+android:layout_height="wrap_content" 
+android:id="@+id/resjson" 
+android:textSize="15sp"
+android:textAlignment="center"
+android:paddingLeft="40dp" />
+</LinearLayout> 
+</LinearLayout>
+
+
+Java Code:
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle; 
+import android.view.View;
+import android.widget.TextView;
+import org.json.JSONArray; 
+import org.json.JSONException; 
+import org.json.JSONObject; 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element; 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import java.io.IOException;
+import java.io.InputStream; 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+public class MainActivity extends AppCompatActivity
+{
+TextViewresxml,resjson;
+@Override protected void onCreate(Bundle savedInstanceState)
+{
+super.onCreate(savedInstanceState); 
+setContentView(R.layout.activity_main);
+resxml=findViewById(R.id.resxml); 
+resjson=findViewById(R.id.resjson);
+}
+public void XMLParser(View v)
+{
+try {
+InputStream is=getAssets().open("city.xml"); 
+DocumentBuilderFactorydbFactory=DocumentBuilderFactory.newInstance();
+DocumentBuilderdBuilder=dbFactory.newDocumentBuilder();
+Document doc=dBuilder.parse(is);
+Element element=doc.getDocumentElement();
+element.normalize();
+NodeListnList= doc.getElementsByTagName("place");
+resxml.setText("XML DATA"); 
+for(int i=0;i<nList.getLength();i++)
+{
+Node node=nList.item(i); if(node.getNodeType()==Node.ELEMENT_NODE)
+{
+Element element2=(Element)node;
+resxml.setText(resxml.getText()+"\n City Name:"+getValue("cityname",element2)+"\n"); 
+resxml.setText(resxml.getText()+"\n Lat:"+getValue("lat",element2)+"\n");
+resxml.setText(resxml.getText()+"\n Long:"+getValue("long",element2)+"\n"); 
+resxml.setText(resxml.getText()+"\n Temperature:"+getValue("temp",element2)+"\n");
+resxml.setText(resxml.getText()+"\n Humidity:"+getValue("humidity",element2)+"\n"); 
+resxml.setText(resxml.getText()+"\n ------------------------- ");
+}
+}
+}
+catch (IOException | ParserConfigurationException | SAXException e)
+{
+e.printStackTrace();
+}
+}
+private static String getValue(String tag, Element element)
+{
+NodeList nodeList=element.getElementsByTagName(tag).item(0).getChildNodes(); Node node=nodeList.item(0);
+return node.getNodeValue();
+}
+public void JSONParser(View v)
+{
+String json;
+try
+{
+InputStream is=getAssets().open("city1.json"); 
+int size=is.available();
+byte[] buffer=new byte[size]; 
+is.read(buffer);
+is.close();
+json=new String(buffer, "UTF-8");
+JSONArrayjsonArray=new JSONArray(json); 
+resjson.setText("JSON DATA"); 
+for(int i=0; i<jsonArray.length();i++)
+{
+JSONObject obj=jsonArray.getJSONObject(i);
+resjson.setText(resjson.getText()+"\n City Name:"+obj.getString("name")+"\n"); 
+resjson.setText(resjson.getText()+"\n Lat:"+obj.getString("lat")+"\n"); 
+resjson.setText(resjson.getText()+"\n Long:"+obj.getString("long")+"\n"); 
+resjson.setText(resjson.getText()+"\n Temperature:"+obj.getString("temp")+"\n");
+resjson.setText(resjson.getText()+"\n Humidity:"+obj.getString("humidity")+"\n"); 
+resjson.setText(resjson.getText()+"\n --------------------- "); 
+} 
+} catch (IOException |JSONException e) { 
+e.printStackTrace();
+}
+}
+}
