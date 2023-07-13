@@ -1,4 +1,4 @@
-XML Code - Activity_Main.xml
+
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
  xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -100,14 +100,4 @@ XML Code - Activity_Main.xml
  />
 </RelativeLayout>
 
-JAVA Coding: Activity_Main.java
-package com.example.labpgm1;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-public class MainActivity extends AppCompatActivity {
- @Override
- protected void onCreate(Bundle savedInstanceState) {
- super.onCreate(savedInstanceState);
- setContentView(R.layout.activity_main);
- }
-}
+
