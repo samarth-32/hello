@@ -1,0 +1,34 @@
+<xml version = "1.0"?>
+<records>
+	<place>
+		<city>Mys</city>
+		<lat>96.54</lat>
+		<long>32.53</long>
+		<temp>60F</temp>
+		<humid>54%</humid>
+	</place>
+	<place>
+		<city>Ban</city>
+		<lat>96.54</lat>
+		<long>32.53</long>
+		<temp>60F</temp>
+		<humid>54%</humid>
+	</place>
+</records>
+
+[
+	{
+		"name": "Mys",
+		"lat":"96.34",
+		"long":"32.53",
+		"temp":"60F",
+		"humid":"54%"
+	},
+{
+		"name": "Mys",
+		"lat":"96.34",
+		"long":"32.53",
+		"temp":"60F",
+		"humid":"54%"
+	}
+]
