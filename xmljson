@@ -69,7 +69,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 public class MainActivity extends AppCompatActivity
 {
-TextViewresxml,resjson;
+TextView resxml,resjson;
 @Override protected void onCreate(Bundle savedInstanceState)
 {
 super.onCreate(savedInstanceState); 
@@ -81,8 +81,8 @@ public void XMLParser(View v)
 {
 try {
 InputStream is=getAssets().open("city.xml"); 
-DocumentBuilderFactorydbFactory=DocumentBuilderFactory.newInstance();
-DocumentBuilderdBuilder=dbFactory.newDocumentBuilder();
+DocumentBuilderFactory dbFactory=DocumentBuilderFactory.newInstance();
+DocumentBuilder dBuilder=dbFactory.newDocumentBuilder();
 Document doc=dBuilder.parse(is);
 Element element=doc.getDocumentElement();
 element.normalize();
@@ -90,7 +90,8 @@ NodeListnList= doc.getElementsByTagName("place");
 resxml.setText("XML DATA"); 
 for(int i=0;i<nList.getLength();i++)
 {
-Node node=nList.item(i); if(node.getNodeType()==Node.ELEMENT_NODE)
+Node node=nList.item(i); 
+if(node.getNodeType()==Node.ELEMENT_NODE)
 {
 Element element2=(Element)node;
 resxml.setText(resxml.getText()+"\n City Name:"+getValue("cityname",element2)+"\n"); 
@@ -109,7 +110,8 @@ e.printStackTrace();
 }
 private static String getValue(String tag, Element element)
 {
-NodeList nodeList=element.getElementsByTagName(tag).item(0).getChildNodes(); Node node=nodeList.item(0);
+NodeList nodeList=element.getElementsByTagName(tag).item(0).getChildNodes();
+Node node=nodeList.item(0);
 return node.getNodeValue();
 }
 public void JSONParser(View v)
