@@ -1,144 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto" 
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent" 
-android:layout_height="match_parent" 
-android:orientation="vertical" 
-tools:context=".MainActivity"> 
-<TextView
-android:layout_width="match_parent" 
-android:layout_height="wrap_content" 
-android:text="XML and JSON Parser" 
-android:textSize="30sp" 
-android:textAlignment="center" />
-<Button
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:onClick="XMLParser" 
-android:text="XML PARSER" 
-android:textAlignment="center" /> 
-<Button
-android:layout_width="match_parent"
-android:layout_height="wrap_content" 
-android:onClick="JSONParser" 
-android:text="JSON PARSER" 
-android:textAlignment="center" />
-<LinearLayout 
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:orientation="horizontal" 
-android:layout_gravity="center">
-<TextView 
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:id="@+id/resxml" 
-android:textSize="15sp" 
-android:textAlignment="center" 
-android:paddingLeft="10dp"
-android:paddingRight="40dp" /> 
-<TextView 
-android:layout_width="wrap_content"
-android:layout_height="wrap_content" 
-android:id="@+id/resjson" 
-android:textSize="15sp"
-android:textAlignment="center"
-android:paddingLeft="40dp" />
-</LinearLayout> 
-</LinearLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="XML AND JSON PARSER"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="XML Parser"
+        android:onClick="xmlparse"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JSON Parser"
+        android:textAlignment="center"
+        android:onClick="jsonparse"
+        />
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="center">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/resxml"
+           android:paddingLeft="10dp"
+           android:paddingRight="40dp"
+           android:textAlignment="center"
+           android:textSize="19sp"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/resj"
+           android:textAlignment="center"
+           android:paddingLeft="40dp"
+           android:textSize="19sp"/>
+   </LinearLayout>
+
+
+</LinearLayout>
 
 Java Code:
 
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle; 
+
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import org.json.JSONArray; 
-import org.json.JSONException; 
-import org.json.JSONObject; 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element; 
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import java.io.IOException;
-import java.io.InputStream; 
+import java.io.InputStream;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-public class MainActivity extends AppCompatActivity
-{
-TextView resxml,resjson;
-@Override protected void onCreate(Bundle savedInstanceState)
-{
-super.onCreate(savedInstanceState); 
-setContentView(R.layout.activity_main);
-resxml=findViewById(R.id.resxml); 
-resjson=findViewById(R.id.resjson);
-}
-public void XMLParser(View v)
-{
-try {
-InputStream is=getAssets().open("city.xml"); 
-DocumentBuilderFactory dbFactory=DocumentBuilderFactory.newInstance();
-DocumentBuilder dBuilder=dbFactory.newDocumentBuilder();
-Document doc=dBuilder.parse(is);
-Element element=doc.getDocumentElement();
-element.normalize();
-NodeList nList= doc.getElementsByTagName("place");
-resxml.setText("XML DATA"); 
-for(int i=0;i<nList.getLength();i++)
-{
-Node node=nList.item(i); 
-if(node.getNodeType()==Node.ELEMENT_NODE)
-{
-Element element2=(Element)node;
-resxml.setText(resxml.getText()+"\n City Name:"+getValue("city",element2)+"\n"); 
-resxml.setText(resxml.getText()+"\n Lat:"+getValue("lat",element2)+"\n");
-resxml.setText(resxml.getText()+"\n Long:"+getValue("long",element2)+"\n"); 
-resxml.setText(resxml.getText()+"\n Temperature:"+getValue("temp",element2)+"\n");
-resxml.setText(resxml.getText()+"\n Humidity:"+getValue("humid",element2)+"\n"); 
-resxml.setText(resxml.getText()+"\n ------------------------- ");
-}
-}
-}
-catch (IOException | ParserConfigurationException | SAXException e)
-{
+
+public class MainActivity extends AppCompatActivity {
+TextView resx,resj;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        resx=findViewById(R.id.resxml);
+        resj=findViewById(R.id.resj);
+    }
+    public void xmlparse(View v){
+        try {
+            InputStream is=getAssets().open("city.xml");
+            DocumentBuilderFactory dbFac=DocumentBuilderFactory.newInstance();
+            DocumentBuilder db=dbFac.newDocumentBuilder();
+            Document doc=db.parse(is);
+            Element element=doc.getDocumentElement();
+            element.normalize();
+            NodeList nList=doc.getElementsByTagName("place");
+            resx.setText("XML DATA");
+            for(int i=0;i<nList.getLength();i++){
+                Node node=nList.item(i);
+                if(node.getNodeType()==Node.ELEMENT_NODE)
+                {
+                    Element el2=(Element) node;
+                    resx.setText(resx.getText()+"\nCity:"+getValue("city",el2)+"\n");
+                    resx.setText(resx.getText()+"\nLat:"+getValue("lat",el2)+"\n");
+                    resx.setText(resx.getText()+"\nLong:"+getValue("long",el2)+"\n");
+                    resx.setText(resx.getText()+"\nTemp:"+getValue("temp",el2)+"\n");
+                    resx.setText(resx.getText()+"\nHumidity:"+getValue("humid",el2)+"\n");
+                }
+            }
+        } catch (IOException | ParserConfigurationException | SAXException e) {
 e.printStackTrace();
-}
-}
-private static String getValue(String tag, Element element)
-{
-NodeList nodeList=element.getElementsByTagName(tag).item(0).getChildNodes();
-Node node=nodeList.item(0);
-return node.getNodeValue();
-}
-public void JSONParser(View v)
-{
-String json;
-try
-{
-InputStream is=getAssets().open("city1.json"); 
-int size=is.available();
-byte[] buffer=new byte[size]; 
-is.read(buffer);
-is.close();
-json=new String(buffer, "UTF-8");
-JSONArray jsonArray=new JSONArray(json); 
-resjson.setText("JSON DATA"); 
-for(int i=0; i<jsonArray.length();i++)
-{
-JSONObject obj=jsonArray.getJSONObject(i);
-resjson.setText(resjson.getText()+"\n City Name:"+obj.getString("name")+"\n"); 
-resjson.setText(resjson.getText()+"\n Lat:"+obj.getString("lat")+"\n"); 
-resjson.setText(resjson.getText()+"\n Long:"+obj.getString("long")+"\n"); 
-resjson.setText(resjson.getText()+"\n Temperature:"+obj.getString("temp")+"\n");
-resjson.setText(resjson.getText()+"\n Humidity:"+obj.getString("humid")+"\n"); 
-resjson.setText(resjson.getText()+"\n --------------------- "); 
-} 
-} catch (IOException |JSONException e) { 
-e.printStackTrace();
-}
-}
+        }
+    }
+    private static String getValue(String tag,Element element)
+    {
+        NodeList nodeList=element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node=nodeList.item(0);
+        return node.getNodeValue();
+    }
+    public void jsonparse(View v){
+        String json;
+        try{
+            InputStream is=getAssets().open("cit.json");
+            int size=is.available();
+            byte[] buf=new byte[size];
+            is.read(buf);
+            is.close();
+            json=new String(buf,"UTF-8");
+            JSONArray jsonArray=new JSONArray(json);
+            resj.setText("JSON DATA");
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject obj=jsonArray.getJSONObject(i);
+                resj.setText(resj.getText()+"\nCity"+obj.getString("name")+"\n");
+                resj.setText(resj.getText()+"\nLat"+obj.getString("lat")+"\n");
+                resj.setText(resj.getText()+"\nLong"+obj.getString("long")+"\n");
+                resj.setText(resj.getText()+"\nTemp"+obj.getString("temp")+"\n");
+                resj.setText(resj.getText()+"\nHumid"+obj.getString("humid")+"\n");
+            }
+
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
