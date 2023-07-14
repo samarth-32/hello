@@ -1,5 +1,5 @@
 <?xml version = "1.0"?>
-<records>
+<rec>
 	<place>
 		<city>Mys</city>
 		<lat>96.54</lat>
@@ -14,7 +14,7 @@
 		<temp>60F</temp>
 		<humid>54%</humid>
 	</place>
-</records>
+</rec>
 
 [
 	{
