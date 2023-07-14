@@ -60,7 +60,7 @@ number.append("0");
 }
 public void star(View v)
 {
-Number.append("*");
+number.append("*");
  
 
 }
