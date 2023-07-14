@@ -94,11 +94,11 @@ Node node=nList.item(i);
 if(node.getNodeType()==Node.ELEMENT_NODE)
 {
 Element element2=(Element)node;
-resxml.setText(resxml.getText()+"\n City Name:"+getValue("cityname",element2)+"\n"); 
+resxml.setText(resxml.getText()+"\n City Name:"+getValue("city",element2)+"\n"); 
 resxml.setText(resxml.getText()+"\n Lat:"+getValue("lat",element2)+"\n");
 resxml.setText(resxml.getText()+"\n Long:"+getValue("long",element2)+"\n"); 
 resxml.setText(resxml.getText()+"\n Temperature:"+getValue("temp",element2)+"\n");
-resxml.setText(resxml.getText()+"\n Humidity:"+getValue("humidity",element2)+"\n"); 
+resxml.setText(resxml.getText()+"\n Humidity:"+getValue("humid",element2)+"\n"); 
 resxml.setText(resxml.getText()+"\n ------------------------- ");
 }
 }
@@ -134,7 +134,7 @@ resjson.setText(resjson.getText()+"\n City Name:"+obj.getString("name")+"\n");
 resjson.setText(resjson.getText()+"\n Lat:"+obj.getString("lat")+"\n"); 
 resjson.setText(resjson.getText()+"\n Long:"+obj.getString("long")+"\n"); 
 resjson.setText(resjson.getText()+"\n Temperature:"+obj.getString("temp")+"\n");
-resjson.setText(resjson.getText()+"\n Humidity:"+obj.getString("humidity")+"\n"); 
+resjson.setText(resjson.getText()+"\n Humidity:"+obj.getString("humid")+"\n"); 
 resjson.setText(resjson.getText()+"\n --------------------- "); 
 } 
 } catch (IOException |JSONException e) { 
